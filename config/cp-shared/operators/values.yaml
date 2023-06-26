@@ -1,0 +1,5 @@
+---
+spec:
+  imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+  catalogNamespace: openshift-marketplace
+  catalogName: ibm-operator-catalog
