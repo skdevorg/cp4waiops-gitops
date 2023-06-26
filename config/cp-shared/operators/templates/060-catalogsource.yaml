@@ -1,0 +1,15 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: {{.Values.spec.catalogName}}
+  namespace: {{.Values.spec.catalogNamespace}}
+  annotations:
+    argocd.argoproj.io/sync-wave: "60"
+spec:
+  displayName: "IBM Operator Catalog"
+  publisher: IBM
+  sourceType: grpc
+  image: {{.Values.spec.imageCatalog}}
+  updateStrategy:
+    registryPoll:
+      interval: 45m
