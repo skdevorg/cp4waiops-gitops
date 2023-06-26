@@ -1,0 +1,841 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ibm.github.io/cp4waiops-gitops/docs/deploy-cloudpak-with-sample-apps/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
+    
+    
+      
+        <title>Deploy cloudpak with sample apps - IBM Cloud Pak for Watson AIOps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7a7fce14.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploy-cloud-pak-for-watson-aiops-demo-environment-in-one-click" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="IBM Cloud Pak for Watson AIOps" class="md-header__button md-logo" aria-label="IBM Cloud Pak for Watson AIOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IBM Cloud Pak for Watson AIOps
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deploy cloudpak with sample apps
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IBM/cp4waiops-gitops" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        GitOps Install
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="IBM Cloud Pak for Watson AIOps" class="md-nav__button md-logo" aria-label="IBM Cloud Pak for Watson AIOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    IBM Cloud Pak for Watson AIOps
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IBM/cp4waiops-gitops" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+          GitOps Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          GitOps Install
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+          v3.6 Official Support
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          v3.6 Official Support
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-cp4waiops-36/" class="md-nav__link">
+        Online Install
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+          v3.7 Official Support
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          v3.7 Official Support
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-cp4waiops-37/" class="md-nav__link">
+        Online Install
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#about-x-small-profile" class="md-nav__link">
+    About x-small profile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-environment" class="md-nav__link">
+    Prepare environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-cloud-pak-for-watson-aiops-demo-environment" class="md-nav__link">
+    Install Cloud Pak for Watson AIOps Demo Environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-environment" class="md-nav__link">
+    Access Environment
+  </a>
+  
+    <nav class="md-nav" aria-label="Access Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloud-pak-for-watson-aiops" class="md-nav__link">
+    Cloud Pak for Watson AIOps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#robot-shop" class="md-nav__link">
+    Robot Shop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#humio" class="md-nav__link">
+    Humio
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
+<ul>
+<li><a href="#deploy-cloud-pak-for-watson-aiops-demo-environment-in-one-click">Deploy Cloud Pak for Watson AIOps demo environment in one click</a></li>
+<li><a href="#about-x-small-profile">About x-small profile</a></li>
+<li><a href="#prepare-environment">Prepare environment</a></li>
+<li><a href="#install-cloud-pak-for-watson-aiops-demo-environment">Install Cloud Pak for Watson AIOps Demo Environment</a></li>
+<li><a href="#access-environment">Access Environment</a><ul>
+<li><a href="#cloud-pak-for-watson-aiops">Cloud Pak for Watson AIOps</a></li>
+<li><a href="#robot-shop">Robot Shop</a></li>
+<li><a href="#humio">Humio</a></li>
+</ul>
+</li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h1 id="deploy-cloud-pak-for-watson-aiops-demo-environment-in-one-click">Deploy Cloud Pak for Watson AIOps demo environment in one click<a class="headerlink" href="#deploy-cloud-pak-for-watson-aiops-demo-environment-in-one-click" title="Permanent link">&para;</a></h1>
+<p>Learn how to deploy an IBM Cloud Pak for Watson AIOps demo environment using GitOps in one click.</p>
+<ul>
+<li>Deploy Cloud Pak for Watson AIOps using custom profile <code>x-small</code> in a sandbox with restricted resources.</li>
+<li>Set up an integration with Humio, Kafka, Kubernetes, and more as postinstallation steps automatically.</li>
+<li>Deploy Robot Shop as a sample application, and other dependencies on the same cluster where Cloud Pak for Watson AIOps runs.</li>
+</ul>
+<p>This installation scenario is tested and verified against Cloud Pak for Watson AIOps 3.2 and 3.3.</p>
+<p><img alt="" src="../images/00-demo-env.png" /></p>
+<h2 id="about-x-small-profile">About x-small profile<a class="headerlink" href="#about-x-small-profile" title="Permanent link">&para;</a></h2>
+<p>The <code>x-small</code> profile is not an official profile that is supported by Cloud Pak for Watson AIOps at the momentm as it only covers AI Manager and does not include Event Manager. As an experimental feature, you can use it to set up demonstrations, proof-of-concept deployments, or development environments.</p>
+<p>Although in this installation scenario the <code>x-small</code> profile is used, this approach also supports a Cloud Pak for Watson AIOps installation in a production environment using official profiles such as <code>small</code> or <code>large</code>.</p>
+<h2 id="prepare-environment">Prepare environment<a class="headerlink" href="#prepare-environment" title="Permanent link">&para;</a></h2>
+<p>Prepare a Red Hat Red Hat OpenShift cluster as your demonstration environment. If you use the <code>x-small</code> profile, it is recommended to set up a cluster with three worker nodes where each node has 16 cores CPU and 32 GB memory.</p>
+<p>Before you start to install the demonstration environment, make sure that you have installed Red Hat Red Hat OpenShift GitOps (Argo CD) on the cluster. To install Red Hat OpenShift GitOps, refer to <a href="https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html">Installing OpenShift GitOps</a>.</p>
+<p>These instructions use Argo CD to install the following applications in one go:</p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ceph</td>
+<td>No</td>
+<td>The storage that is used by Cloud Pak for Watson AIOps and other applications. It can be skipped if you already have storage solution available on your target cluster.</td>
+</tr>
+<tr>
+<td>Cloud Pak for Watson AIOps</td>
+<td>Yes</td>
+<td>IBM Cloud Pak for Watson AIOps.</td>
+</tr>
+<tr>
+<td>Robot Shop</td>
+<td>No</td>
+<td>The sample application used to demonstrate Cloud Pak for Watson AIOps features.</td>
+</tr>
+<tr>
+<td>Humio &amp; Fluent Bit</td>
+<td>No</td>
+<td>The log collector that is used by Cloud Pak for Watson AIOps for log anomaly detecting.</td>
+</tr>
+<tr>
+<td>Istio</td>
+<td>No</td>
+<td>The service mesh used by sample application for fault injection.</td>
+</tr>
+</tbody>
+</table>
+<p>NOTE: This example uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<h2 id="install-cloud-pak-for-watson-aiops-demo-environment">Install Cloud Pak for Watson AIOps Demo Environment<a class="headerlink" href="#install-cloud-pak-for-watson-aiops-demo-environment" title="Permanent link">&para;</a></h2>
+<p>Log in to Argo CD, then start the installation by clicking the <code>NEW APP</code> button on upper left to create an Argo CD App.</p>
+<p>Complete the form using the suggested field values listed in following table:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application Name</td>
+<td>cp4waiops-demo</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>default</td>
+</tr>
+<tr>
+<td>Sync Policy</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Repository URL</td>
+<td>https://github.com/IBM/cp4waiops-gitops</td>
+</tr>
+<tr>
+<td>Revision</td>
+<td>HEAD</td>
+</tr>
+<tr>
+<td>Path</td>
+<td>config/all-in-one</td>
+</tr>
+<tr>
+<td>Cluster URL</td>
+<td>https://kubernetes.default.svc</td>
+</tr>
+<tr>
+<td>Namespace</td>
+<td>openshift-gitops</td>
+</tr>
+</tbody>
+</table>
+<p>NOTE:</p>
+<p>NOTE: If you use a repository that is forked from the official <a href="https://github.com/IBM/cp4waiops-gitops">Cloud Pak for Watson AIOps GitOps repository</a> or a different branch, then you must update the values of the <code>Repository URL</code> and <code>Revision</code> parameters to match your repository and branch. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, then these two parameters must be changed.</p>
+<p>You can also update the following parameters to customize the installation.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>argocd.cluster</td>
+<td>string</td>
+<td>openshift</td>
+<td>The type of the cluster that Argo CD runs on, valid values include: openshift, kubernetes.</td>
+</tr>
+<tr>
+<td>argocd.allowLocalDeploy</td>
+<td>bool</td>
+<td>true</td>
+<td>Allow apps to be deployed on the same cluster where Argo CD runs.</td>
+</tr>
+<tr>
+<td>rookceph.enabled</td>
+<td>bool</td>
+<td>true</td>
+<td>Specify whether or not to install Ceph as storage used by Cloud Pak for Watson AIOps.</td>
+</tr>
+<tr>
+<td>cp4waiops.version</td>
+<td>string</td>
+<td>v3.3</td>
+<td>Specify the version of Cloud Pak for Watson AIOps, e.g.: v3.2, v3.3.</td>
+</tr>
+<tr>
+<td>cp4waiops.profile</td>
+<td>string</td>
+<td>small</td>
+<td>The Cloud Pak for Watson AIOps deployment profile, for example: x-small, small, large.</td>
+</tr>
+<tr>
+<td>cp4waiops.dockerUsername</td>
+<td>string</td>
+<td>cp</td>
+<td>The username of image registry used to pull images.</td>
+</tr>
+<tr>
+<td>cp4waiops.dockerPassword</td>
+<td>string</td>
+<td>REPLACE_IT</td>
+<td>The password of image registry used to pull images.</td>
+</tr>
+<tr>
+<td>cp4waiops.aiManager.enabled</td>
+<td>bool</td>
+<td>true</td>
+<td>Specify whether to install AI Manager.</td>
+</tr>
+<tr>
+<td>cp4waiops.aiManager.namespace</td>
+<td>string</td>
+<td>cp4waiops</td>
+<td>The namespace where AI Manager is installed.</td>
+</tr>
+<tr>
+<td>cp4waiops.aiManager.instanceName</td>
+<td>string</td>
+<td>aiops-installation</td>
+<td>The instance name of AI Manager.</td>
+</tr>
+<tr>
+<td>cp4waiops.eventManager.enabled</td>
+<td>bool</td>
+<td>true</td>
+<td>Specify whether to install Event Manager.</td>
+</tr>
+<tr>
+<td>cp4waiops.eventManager.namespace</td>
+<td>string</td>
+<td>noi</td>
+<td>The namespace where Event Manager is installed.</td>
+</tr>
+<tr>
+<td>cp4waiops.eventManager.clusterDomain</td>
+<td>string</td>
+<td>REPLACE_IT</td>
+<td>The domain name of the cluster where Event Manager is installed.</td>
+</tr>
+</tbody>
+</table>
+<p>NOTE:</p>
+<ul>
+<li><code>cp4waiops.dockerPassword</code> This is the entitlement key that you can copy from <a href="https://myibm.ibm.com/products-services/containerlibrary">My IBM Container Software Library</a>.</li>
+<li><code>cp4waiops.profile</code> The profile <code>x-small</code> is only suitable for demonstrations and proof-of-concept deployments. Production environments must use a <code>small</code> or <code>large</code> profile.</li>
+<li><code>cp4waiops.eventManager.enabled</code> This must be false if you have a value of <code>x-small</code> for <code>cp4waiops.profile</code>, as this profile size is only suitable for deployments of AI Manager, and not for deployments of AI Manager and Event Manager.</li>
+<li><code>cp4waiops.eventManager.clusterDomain</code> This is the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, <code>apps.clustername.abc.xyz.com</code>.</li>
+</ul>
+<p>The following installation parameters are not commonly used, so they are invisible when you create the Argo CD App from UI. But you can add them when completing the form in <code>HELM</code> &gt; <code>VALUES</code> field.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cp4waiops.setup.enabled</td>
+<td>bool</td>
+<td>false</td>
+<td>Set up Cloud Pak for Watson AIOps after it is installed.</td>
+</tr>
+<tr>
+<td>cp4waiops.setup.humio.enabled</td>
+<td>bool</td>
+<td>true</td>
+<td>Setup Humio integration.</td>
+</tr>
+<tr>
+<td>cp4waiops.setup.kafka.enabled</td>
+<td>bool</td>
+<td>true</td>
+<td>Setup Kafka integration.</td>
+</tr>
+<tr>
+<td>cp4waiops.setup.kubernetes.enabled</td>
+<td>bool</td>
+<td>true</td>
+<td>Setup Kubernetes integration.</td>
+</tr>
+<tr>
+<td>robotshop.enabled</td>
+<td>bool</td>
+<td>false</td>
+<td>Specify whether to install Robot Shop.</td>
+</tr>
+<tr>
+<td>humio.enabled</td>
+<td>bool</td>
+<td>false</td>
+<td>Specify whether to install Humio.</td>
+</tr>
+<tr>
+<td>istio.enabled</td>
+<td>bool</td>
+<td>false</td>
+<td>Specify whether to install Istio.</td>
+</tr>
+</tbody>
+</table>
+<p>For example, adding the following YAML snippet to <code>HELM</code> &gt; <code>VALUES</code> field enables Robot Shop, Humio, and Istio: </p>
+<div class="highlight"><pre><span></span><code><span class="nt">robotshop</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">humio</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">istio</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>When the form is completed, click <code>CREATE</code> to start the installation. Whilst waiting for the install to complete, you will see more Apps being rolled out gradually from the Argo CD UI. Each App represents a specific application to be deployed and is managed by the root level App.</p>
+<p><img alt="" src="../images/01-apps.png" /></p>
+<p>Depending on the installation parameters that you specified, it usually takes one hour to finish the installation of Cloud Pak for Watson AIOps, and ten minutes to finish all other application deployments, including Ceph, Robot Shop, Humio, Istio, and more. When the Argo CD Apps turn green, (<code>Synced</code> and <code>Healthy</code>) then the installation of the Cloud Pak for Watson AIOps demonstration environment is finished.</p>
+<p><img alt="" src="../images/02-install-complete.png" /></p>
+<h2 id="access-environment">Access Environment<a class="headerlink" href="#access-environment" title="Permanent link">&para;</a></h2>
+<h3 id="cloud-pak-for-watson-aiops">Cloud Pak for Watson AIOps<a class="headerlink" href="#cloud-pak-for-watson-aiops" title="Permanent link">&para;</a></h3>
+<p>To access Cloud Pak for Watson AIOps, you can run following command to get the URL. Here <code>aiops-installation</code> is the Cloud Pak for Watson AIOps instance name that you specified using the installation parameter <code>cp4waiops.instanceName</code> when creating the Argo CD App.</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>-n<span class="w"> </span>cp4waiops<span class="w"> </span>get<span class="w"> </span>installation<span class="w"> </span>aiops-installation<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.status.locations.cloudPakUiUrl}{&quot;\n&quot;}&#39;</span>
+</code></pre></div>
+<p>To get the password for user <code>admin</code>, run following command:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>-n<span class="w"> </span>ibm-common-services<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>platform-auth-idp-credentials<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.data.admin_password}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
+</code></pre></div>
+<p>Use this information to log in to the Cloud Pak for Watson AIOps UI.</p>
+<p><img alt="" src="../images/waiops-dashbord.png" /></p>
+<p>If you set the installation parameter <code>cp4waiops.setup</code> to <code>true</code>, then you have pre-configured an integration with Humio, Kafka, and Kubernetes in. To verify this, go to <code>Define</code> &gt; <code>Data and tool connections</code> to see these integrations displayed as follows:</p>
+<p><img alt="" src="../images/03-pre-configured-connections.png" /></p>
+<h3 id="robot-shop">Robot Shop<a class="headerlink" href="#robot-shop" title="Permanent link">&para;</a></h3>
+<p>To access Robot Shop, run the following command to get the URL:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>-n<span class="w"> </span>istio-system<span class="w"> </span>get<span class="w"> </span>route<span class="w"> </span>istio-ingressgateway<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{&quot;http://&quot;}{.spec.host}{&quot;\n&quot;}&#39;</span>
+</code></pre></div>
+<p><img alt="" src="../images/04-robotshop.png" /></p>
+<h3 id="humio">Humio<a class="headerlink" href="#humio" title="Permanent link">&para;</a></h3>
+<p>To access Humio, run the following command to get the URL:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>-n<span class="w"> </span>humio-logging<span class="w"> </span>get<span class="w"> </span>route<span class="w"> </span>humio-humio-core<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{&quot;http://&quot;}{.spec.host}{&quot;\n&quot;}&#39;</span>
+</code></pre></div>
+<p>To get the password for user <code>developer</code>, run following command:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>-n<span class="w"> </span>humio-logging<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>developer-user-password<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
+</code></pre></div>
+<p>Use this information to log in to the Humio UI. After logging in, you can see a pre-defined repository named <code>robot-shop</code> for Robot Shop:</p>
+<p><img alt="" src="../images/05-humio-repo.png" /></p>
+<p>Click the repository to see the live logs captured by Humio from Robot Shop:</p>
+<p><img alt="" src="../images/06-humio-logs.png" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.407015b8.min.js"></script>
+      
+    
+  </body>
+</html>
