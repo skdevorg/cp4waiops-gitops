@@ -1,0 +1,17 @@
+# -----------------------------------------------------------------------------
+# Ceph rook parameters
+# -----------------------------------------------------------------------------
+cephCluster:
+  mon:
+    count: 1
+    allowMultiplePerNode: true
+
+cephFilesystem:
+  metadataPool:
+    replicated:
+      size: 1
+      requireSafeReplicaSize: false
+  dataPools:
+    replicated:
+      size: 1
+      requireSafeReplicaSize: false
